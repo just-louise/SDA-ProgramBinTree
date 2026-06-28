@@ -11,8 +11,8 @@
 #define Next(P) (P)->next
 #define First(L) ((L).First)
 
-typedef char infotype;
-typedef struct tElmtlist *address; //address menjadi type data pointer yang menunjuk type data tElmtlist                //node
+typedef char infotype[50];
+typedef struct tElmtlist *address; 
 typedef struct  tElmtlist   
 {
 	infotype info;

@@ -6,7 +6,7 @@
 address Alokasi(infotype X) {
     address P = (address)malloc(sizeof(ElmtList));
     if (P != NULL) {
-        Info(P) = X;
+        strcpy(Info(P), X);
         Next(P) = Nil;
     }
     return P;
@@ -77,7 +77,7 @@ void Delete(queue *Q, infotype *data) {
     }
 
     address P = Front(*Q);
-    *data = Info(P);
+    strcpy(*data, Info(P));
     setFront(Q);
     Dealokasi(&P);
 }
@@ -92,7 +92,7 @@ void PrintQueue(queue Q) {
     printf("Isi Queue (front -> rear): ");
     address temp = Front(Q);
     while (temp != Nil) {
-        printf("%c", Info(temp));
+        printf("%s", Info(temp));
         if (Next(temp) != Nil) printf(" -> ");
         temp = Next(temp);
     }
