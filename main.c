@@ -6,7 +6,19 @@
 #include "binTree.h"
 
 void menu_autocomplete(Node *root){
+    char prefix [50];
+    int count;
 
+    printf("\n=== KAMUS PINTAR ===\n");
+    printf("Masukkan awalan kata (min. 3 huruf): ");
+    scanf("%s", prefix);
+
+    if (strlen(prefix) < 3){
+        printf("Awalan kata minimal 3 huruf!\n");
+        return;
+    }
+
+    SearchPrefix(root, prefix, &count);
 }
 
 void menu_sinonim(Node *root){
@@ -14,7 +26,7 @@ void menu_sinonim(Node *root){
 }
 
 void menu_kalimat(Node *root, queue *Q){
-    
+
 }
 
 int main(){
@@ -23,7 +35,7 @@ int main(){
     int pilihan;
 
     Initial(&Q);
-    LoadKamus(&root, "dataset/tesaurus-master/kamus.txt");
+    LoadKamus(&root, "dataset/kamus.txt");
 
     do {
         printf("\n=== LEXIBUILD ===\n");
@@ -31,7 +43,7 @@ int main(){
         printf("2. Cari Sinonim\n");
         printf("3. Buat Kalimat\n");
         printf("0. Keluar \n");
-        printf("Pilihan: \n");
+        printf("Pilihan: ");
         scanf("%d", &pilihan);
 
         switch(pilihan){
