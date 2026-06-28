@@ -22,7 +22,19 @@ void menu_autocomplete(Node *root){
 }
 
 void menu_sinonim(Node *root){
+    char kata [50];
+    Node *hasil;
 
+    printf("\n=== CARI SINONIM ===\n");
+    printf("Masukkan kata: ");
+    scanf("%s", kata);
+
+    hasil = CariSinonim(root, kata);
+    if (hasil != NULL){
+        PrintSinonim(hasil);
+    } else {
+        printf("Kata \"%s\" tidak ditemukan dalam kamus.\n", kata);
+    }
 }
 
 void menu_kalimat(Node *root, queue *Q){
