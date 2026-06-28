@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build LexiBuild",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "main.c",
+                "binTree.c", 
+                "queue.c",
+                "-o",
+                "lexibuild"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include <string.h>
 
 /* Mengalokasikan node baru dengan nilai X */
-address Alokasi(infotype X) {
-    address P = (address)malloc(sizeof(ElmtList));
+addressQ AlokasiQ(infotype X) {
+    addressQ P = (addressQ)malloc(sizeof(ElmtList));
     if (P != NULL) {
         strcpy(Info(P), X);
         Next(P) = Nil;
@@ -13,13 +14,13 @@ address Alokasi(infotype X) {
 }
 
 /* Membebaskan memori node P */
-void Dealokasi(address *P) {
+void DealokasiQ(addressQ *P) {
     free(*P);
     *P = Nil;
 }
 
 /* Mengecek apakah queue kosong */
-boolean IsEmpty(queue Q) {
+boolean IsEmptyQ(queue Q) {
     return (Front(Q) == Nil && Rear(Q) == Nil);
 }
 
@@ -31,7 +32,7 @@ void Initial(queue *Q) {
 
 /* Set front queue ke node berikutnya */
 void setFront(queue *Q) {
-    if (!IsEmpty(*Q)) {
+    if (!IsEmptyQ(*Q)) {
         Front(*Q) = Next(Front(*Q));
         if (Front(*Q) == Nil) {
             Rear(*Q) = Nil;
@@ -41,10 +42,8 @@ void setFront(queue *Q) {
 
 /* Set rear queue ke node baru (dipakai internal) */
 void setRear(queue *Q) {
-    /* Fungsi ini biasanya dipakai untuk update rear ke node terakhir.
-       Implementasi lengkap ada di Insert. */
-    if (!IsEmpty(*Q)) {
-        address temp = Front(*Q);
+    if (!IsEmptyQ(*Q)) {
+        addressQ temp = Front(*Q);
         while (Next(temp) != Nil) {
             temp = Next(temp);
         }
@@ -54,13 +53,13 @@ void setRear(queue *Q) {
 
 /* Menambahkan elemen data ke belakang queue (enqueue) */
 void Insert(queue *Q, infotype data) {
-    address P = Alokasi(data);
+    addressQ P = AlokasiQ(data);
     if (P == Nil) {
         printf("Alokasi gagal! Memori penuh.\n");
         return;
     }
 
-    if (IsEmpty(*Q)) {
+    if (IsEmptyQ(*Q)) {
         Front(*Q) = P;
         Rear(*Q) = P;
     } else {
@@ -70,27 +69,27 @@ void Insert(queue *Q, infotype data) {
 }
 
 /* Mengambil dan menghapus elemen dari depan queue (dequeue) */
-void Delete(queue *Q, infotype *data) {
-    if (IsEmpty(*Q)) {
+void DeleteQ(queue *Q, infotype *data) {
+    if (IsEmptyQ(*Q)) {
         printf("Queue kosong! Tidak ada yang bisa dihapus.\n");
         return;
     }
 
-    address P = Front(*Q);
+    addressQ P = Front(*Q);
     strcpy(*data, Info(P));
     setFront(Q);
-    Dealokasi(&P);
+    DealokasiQ(&P);
 }
 
 /* Menampilkan semua elemen queue dari front ke rear */
 void PrintQueue(queue Q) {
-    if (IsEmpty(Q)) {
+    if (IsEmptyQ(Q)) {
         printf("Queue kosong.\n");
         return;
     }
 
     printf("Isi Queue (front -> rear): ");
-    address temp = Front(Q);
+    addressQ temp = Front(Q);
     while (temp != Nil) {
         printf("%s", Info(temp));
         if (Next(temp) != Nil) printf(" -> ");
