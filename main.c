@@ -42,7 +42,7 @@ void menu_kalimat(Node *root, queue *Q){
     char kata[50];
 
     do {
-        printf("\n=== RUANG KERJA ===\n");
+        printf("\n=== BUAT KALIMAT ===\n");
         printf("1. Cari Awalan Kata\n");
         printf("2. Cari Sinonim\n");
         printf("0. Selesai\n");
@@ -64,14 +64,41 @@ void menu_kalimat(Node *root, queue *Q){
 
                 if (count > 0){
                     printf("Pilih kata: ");
-                    scanf("%s", kata);
+                    scanf(" ");           
+                    fgets(kata, 50, stdin);
+                    kata[strcspn(kata, "\n")] = '\0';
                     Insert(Q,kata);
                     printf("Kata \"%s\" ditambahkan ke kalimat.\n", kata);
                 }
                 break;
             case 2: 
+                printf ("Masukkan kata: ");
+                scanf ("%s", kata);
+
+                Node *hasil = CariSinonim(root, kata);
+                if (hasil != NULL){
+                    PrintSinonim(hasil);
+                    printf("Pilih kata: ");
+                    scanf(" ");           
+                    fgets(kata, 50, stdin);
+                    kata[strcspn(kata, "\n")] = '\0';
+                    Insert(Q, kata);
+                    printf("Kata \"%s\" ditambahkan ke kalimat.\n", kata);
+                } else {
+                    printf("Kata \"%s\" tidak ditemukan.\n", kata);
+                }
                 break;
             case 0:
+                if (IsEmptyQ(*Q)){
+                    printf("Kalimat kosong!\n");
+                } else {
+                    printf("\nKalimat anda: ");
+                    while (!IsEmptyQ(*Q)){
+                        DeleteQ(Q, &kata);
+                        printf("%s ", kata);
+                    }
+                    printf("\n");
+                }
                 break;
             default: printf ("Pilihan tidak valid. \n");
         }
