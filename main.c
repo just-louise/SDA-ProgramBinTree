@@ -38,7 +38,46 @@ void menu_sinonim(Node *root){
 }
 
 void menu_kalimat(Node *root, queue *Q){
+    int pilihan;
+    char kata[50];
 
+    do {
+        printf("\n=== RUANG KERJA ===\n");
+        printf("1. Cari Awalan Kata\n");
+        printf("2. Cari Sinonim\n");
+        printf("0. Selesai\n");
+        printf("Pilihan: ");
+        scanf("%d", &pilihan);
+
+        switch(pilihan){
+            case 1:
+                printf("Masukkan awalan kata (min 3 huruf): ");
+                scanf("%s", kata);
+
+                if (strlen(kata) < 3){
+                    printf("awalan kata minimal 3 huruf! \n");
+                    break;
+                }
+
+                int count;
+                SearchPrefix(root, kata, &count);
+
+                if (count > 0){
+                    printf("Pilih kata: ");
+                    scanf("%s", kata);
+                    Insert(Q,kata);
+                    printf("Kata \"%s\" ditambahkan ke kalimat.\n", kata);
+                }
+                break;
+            case 2: 
+                break;
+            case 0:
+                break;
+            default: printf ("Pilihan tidak valid. \n");
+        }
+
+
+    } while (pilihan !=0);
 }
 
 int main(){
