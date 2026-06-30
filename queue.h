@@ -11,28 +11,28 @@
 #define Next(P) (P)->next
 #define First(L) ((L).First)
 
-typedef char infotype;
-typedef struct tElmtlist *address; //address menjadi type data pointer yang menunjuk type data tElmtlist                //node
+typedef char infotype[50];
+typedef struct tElmtlist *addressQ; 
 typedef struct  tElmtlist   
 {
 	infotype info;
-	address next;
+	addressQ next;
 }ElmtList;
  
 typedef struct {
-	address front;
-	address rear;
+	addressQ front;
+	addressQ rear;
 }queue;
 
-boolean IsEmpty(queue Q);
+boolean IsEmptyQ(queue Q);
 void Initial(queue *Q);
 void setFront(queue *Q);
 void setRear(queue *Q);
-void Delete(queue *Q, infotype *data);
+void DeleteQ(queue *Q, infotype *data);
 void Insert(queue *Q, infotype data);
 void PrintQueue(queue Q);
-address Alokasi(infotype  X);
-void Dealokasi(address *P);
+addressQ AlokasiQ(infotype  X);
+void DealokasiQ(addressQ *P);
 
 #endif
 
